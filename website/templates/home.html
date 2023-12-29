@@ -1,27 +1,57 @@
 {%extends 'base.html'%}
 
 {% block content %}
-<div class="col-md-6 offset-md-3">
     {% if user.is_authenticated %}
-<h1> Hello World! </h1>
+<h2 class="text-center"><u> Records </u></h2><br/>
+    <table class="table table-striped table-hover table-bordered">
+        <tr>
+            <thead class="table-dark">
+                <th >#ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip Code</th>
+            </thead>
+        </tr>
+        {% for record in records%}
+        <tr>
+            <tbody>
+                <td> <a href="{%url 'record' record.id%}" title="Click to access!">{{ record.id }} </a> </td>
+                <td>{{ record.first_name }} {{record.last_name}}</td>
+                <td><a href="mailto:{{record.email}}">{{ record.email }}</a></td>
+                <td>{{ record.phone }}</td>
+                <td>{{ record.address }}</td>
+                <td>{{ record.city }}</td>
+                <td>{{ record.state }}</td>
+                <td>{{ record.zipcode }}</td>
+            </tbody>
+          </tr>
+        {% endfor %}
+    </table>
     {% else %}
 
-<h1>Login</h1>
+
+<div class="col-md-6 offset-md-3">
+    <h2 class="text-center">Login</h2>
     <br/>
 
     <form method="post" action="{%url 'home' %}">
         {% csrf_token %}
-  <div class="form-group">
-    <input type="text" class="form-control" name="username" id="user_name" aria-describedby="emailHelp" placeholder="Username" required >
-<br/>
-  </div>
-  <div class="form-group">
-    <input type="password" class="form-control" name="password_field" id="passwordfield" placeholder="Password" required >
-  </div>
-      <br/>
-  <button type="submit" class="btn btn-secondary">Login</button>
-</form>
 
+          <div class="form-group">
+            <input type="text" class="form-control" name="username" id="user_name" aria-describedby="emailHelp" placeholder="Username" required >
+              <br/>
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" name="password_field" id="passwordfield" placeholder="Password" required >
+          </div>
+              <br/>
+          <button type="submit" class="btn btn-secondary">Login</button>
+
+    </form>
 </div>
 {% endif %}
 

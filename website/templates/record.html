@@ -1,0 +1,34 @@
+{%extends 'base.html'%}
+
+{% block content %}
+
+<div class="col-md-6 offset-md-3">
+<!--    <h3  class="text-center" >Customer Record: {{ customer_record.id }}</h3>-->
+    <br/>
+    <div class="card">
+      <div class="card-header">
+          <p> Customer Record: {{ customer_record.id }} </p>
+      </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <!--<li class="list-group-item list-group-item-action list-group-item-light">{{ customer_record.id }}</li>-->
+                <li class="list-group-item"><strong>Full Name: </strong>{{ customer_record.first_name }} {{customer_record.last_name}}</li>
+                 <li class="list-group-item"><strong>Email: </strong><a href="mailto:{{record.email}}">{{ customer_record.email }}</a></li>
+                 <li class="list-group-item"><strong>Phone: </strong>{{ customer_record.phone }}</li>
+                 <li class="list-group-item"><strong>Address: </strong>{{ customer_record.address }}</li>
+                 <li class="list-group-item"><strong>City: </strong>{{ customer_record.city }}</li>
+                 <li class="list-group-item"><strong>State: </strong>{{ customer_record.state }}</li>
+                 <li class="list-group-item"><strong>ZipCode: </strong>{{ customer_record.zipcode }}</li>
+            </ul>
+        </div>
+        <div class="card-footer text-muted">
+           <p>Created on: {{ customer_record.created_date }}
+           </p>
+        </div>
+    </div>
+    <br/>
+    <a class="btn btn-secondary" href="{% url 'home' %}">Back</a>
+    <a class="btn btn-danger" href="{% url 'delete_record' customer_record.id %}">Delete</a>
+    <a class="btn btn-info" href="{% url 'update_record' customer_record.id %}">Update Record</a>
+</div>
+{% endblock %}
